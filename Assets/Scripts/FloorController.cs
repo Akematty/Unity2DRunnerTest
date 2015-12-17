@@ -23,15 +23,14 @@ public class FloorController : MonoBehaviour {
         
         int cn = this.sManger.CurrentFloorsLineProp;
 
-        //print(floorsLineNum +"/");
         if (cn > this.floorsLineNum)
         {
-            //Debug.Log("000");
             Destroy(this.gameObject);
         }
 
 	}
 
+    //What is the group number this floor belons to
     public int FloorsLineProp
     {
         get
