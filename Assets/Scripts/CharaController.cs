@@ -25,8 +25,9 @@ public class CharaController : MonoBehaviour {
     //                          [走行速度の標準値]
     private Vector3 actionRunning(float runSpeed)
     {
-        //移動処理
+        //現在位置を格納
         Vector3 currentPos  = this.transform.position;
+        //移動
         currentPos.x        += runSpeed * Time.deltaTime;
 
         return currentPos;
@@ -41,6 +42,7 @@ public class CharaController : MonoBehaviour {
     {
         //ジャンプ可能かどうか見る
         //下記条件が真であれば,ジャンプする
+        //  条件：スペースキーが押される 且つ 床に接触している判定が取れている
         if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {
             rb.AddForce(force: Vector3.up * jumpPower, mode: ForceMode.Impulse);
@@ -69,9 +71,12 @@ public class CharaController : MonoBehaviour {
         this.isOnGround         = actionJump(this.jumpHeight, this.isOnGround);
     }
 
-
+    //衝突した瞬間に処理がされる関数
+    //                         [コリジョン(衝突)情報]
     private void OnCollisionEnter(Collision other)
     {
+        //床に衝突した瞬間の処理
+        //床に接触しているフラグを立てる,これによって再びジャンプアクションが可能になる
         if (other.gameObject.tag == "Floor" && !this.isOnGround)
         {
             this.isOnGround = true;

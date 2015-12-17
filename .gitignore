@@ -19,6 +19,7 @@
 *.prefab.meta
 *.csv.meta
 *.unity.meta
+*.cs.meta
 
 
 # Unity3D Generated File On Crash Reports
